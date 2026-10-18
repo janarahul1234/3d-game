@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-void: #050510;
+  --color-deep: #0a0f2e;
+  --color-cyan-glow: #22d3ee;
+  --color-magenta-glow: #e879f9;
+  --color-amber-glow: #fbbf24;
+  --font-display: 'Segoe UI Variable Display', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+  --font-mono-game: 'Cascadia Mono', ui-monospace, Consolas, monospace;
+
+  --animate-float-slow: floatSlow 7s ease-in-out infinite;
+  --animate-neon-pulse: neonPulse 2.4s ease-in-out infinite;
+  --animate-rise-fade: riseFade 4.5s ease-out forwards;
+
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes neonPulse {
+    0%, 100% { opacity: 1; text-shadow: 0 0 12px rgba(34, 211, 238, .8), 0 0 34px rgba(34, 211, 238, .35); }
+    50% { opacity: .82; text-shadow: 0 0 6px rgba(34, 211, 238, .5), 0 0 18px rgba(34, 211, 238, .2); }
+  }
+  @keyframes riseFade {
+    0% { opacity: 0; transform: translateY(14px) scale(.98); }
+    8% { opacity: 1; transform: translateY(0) scale(1); }
+    75% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-10px); }
+  }
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: var(--color-void);
+  color: #e2e8f0;
+  font-family: var(--font-display);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+input, textarea {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* Glass panel surface used across menus and HUD */
+.glass {
+  background: linear-gradient(160deg, rgba(13, 20, 45, 0.72), rgba(7, 10, 28, 0.6));
+  border: 1px solid rgba(103, 232, 249, 0.18);
+  box-shadow:
+    0 0 0 1px rgba(10, 15, 46, 0.4),
+    0 18px 60px rgba(2, 3, 12, 0.65),
+    inset 0 1px 0 rgba(148, 197, 255, 0.12);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+}
+
+.glass-subtle {
+  background: rgba(8, 12, 34, 0.45);
+  border: 1px solid rgba(103, 232, 249, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.neon-text {
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.75), 0 0 30px rgba(34, 211, 238, 0.3);
+}
+
+.neon-text-magenta {
+  text-shadow: 0 0 10px rgba(232, 121, 249, 0.75), 0 0 30px rgba(232, 121, 249, 0.3);
+}
+
+.btn-neon {
+  position: relative;
+  border: 1px solid rgba(34, 211, 238, 0.55);
+  background: linear-gradient(150deg, rgba(34, 211, 238, 0.16), rgba(34, 211, 238, 0.04));
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.18), inset 0 0 18px rgba(34, 211, 238, 0.08);
+  transition: box-shadow 140ms ease, transform 140ms ease, background 140ms ease;
+}
+.btn-neon:hover:not(:disabled) {
+  box-shadow: 0 0 28px rgba(34, 211, 238, 0.4), inset 0 0 24px rgba(34, 211, 238, 0.14);
+  transform: translateY(-1px);
+}
+.btn-neon:active:not(:disabled) { transform: translateY(1px) scale(0.99); }
+.btn-neon:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn-magenta {
+  border-color: rgba(232, 121, 249, 0.55);
+  background: linear-gradient(150deg, rgba(232, 121, 249, 0.16), rgba(232, 121, 249, 0.04));
+  box-shadow: 0 0 18px rgba(232, 121, 249, 0.18), inset 0 0 18px rgba(232, 121, 249, 0.08);
+}
+.btn-magenta:hover:not(:disabled) {
+  box-shadow: 0 0 28px rgba(232, 121, 249, 0.4), inset 0 0 24px rgba(232, 121, 249, 0.14);
+}
+
+/* Slim neon scrollbar for chat / lists */
+.scroll-thin::-webkit-scrollbar { width: 5px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: rgba(34, 211, 238, 0.35); border-radius: 4px; }
+.scroll-thin { scrollbar-width: thin; scrollbar-color: rgba(34,211,238,.35) transparent; }
+
+/* Range inputs styled as neon sliders */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(34,211,238,.8) var(--pct, 60%), rgba(34,211,238,.15) var(--pct, 60%));
+  outline: none;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow, .animate-neon-pulse { animation: none !important; }
+}
